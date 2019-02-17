@@ -19,6 +19,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 
+import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './expenses/dashboard/dashboard.component';
 
 import { environment } from '../environments/environment';
@@ -30,6 +31,7 @@ import { environment } from '../environments/environment';
     SignupComponent,
     HeaderComponent,
     SidenavComponent,
+    HomeComponent,
     DashboardComponent
   ],
   imports: [
