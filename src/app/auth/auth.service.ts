@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 import { User } from './user.model';
 import { AuthData } from './auth-data.model';
@@ -54,6 +55,20 @@ export class AuthService {
       .catch(error => {
         console.log(error);
       });
+  }
+
+  doFacebookLogin(){
+     return new Promise<any>((resolve, reject) => {
+       let provider = new firebase.auth.FacebookAuthProvider();
+       this.afAuth.auth
+       .signInWithPopup(provider)
+       .then(res => {
+         resolve(res);
+       }, err => {
+         console.log(err);
+         reject(err);
+       })
+     })
   }
 
   logout() {

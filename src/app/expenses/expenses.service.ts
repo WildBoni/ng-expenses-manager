@@ -27,8 +27,8 @@ export class ExpensesService {
           return docArray.map(doc => {
             return {
               id: doc.payload.doc.id,
-              name: doc.payload.doc.data().name,
-              amount: doc.payload.doc.data().amount
+              // name: doc.payload.doc.data().name,
+              // amount: doc.payload.doc.data().amount
             };
           });
         })
