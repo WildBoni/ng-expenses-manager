@@ -10,9 +10,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AngularMaterialModule } from './angular-material.module';
 
-import { MaterialModule } from './material.module';
-
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 
@@ -26,6 +26,7 @@ import { environment } from '../environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     LoginComponent,
     SignupComponent,
     HeaderComponent,
@@ -35,14 +36,14 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    AppRoutingModule,
+    AngularMaterialModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

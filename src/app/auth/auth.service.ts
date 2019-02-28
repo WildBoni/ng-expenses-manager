@@ -60,7 +60,7 @@ export class AuthService {
     this.afAuth.auth.signOut();
   }
 
-  getIsAuth() {
+  isAuth() {
     return this.isAuthenticated;
   }
 }
