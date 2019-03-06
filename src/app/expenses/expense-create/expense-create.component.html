@@ -1,0 +1,30 @@
+<form (submit)="onAddExpense(myForm)" #myForm="ngForm" [formGroup]="expenseForm">
+  <h3 align="center">Insert new expense</h3>
+  <mat-form-field class="full-width">
+    <input matInput required type="text"
+      formControlName="title" placeholder="Expense title">
+    <mat-error>Enter a title</mat-error>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput required type="text"
+      formControlName="amount" placeholder="Expense amount">
+    <mat-error>Amount required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Expense date" [matDatepicker]="picker"
+      formControlName="date" readonly required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput required type="text"
+      formControlName="title" placeholder="Expense description">
+    <mat-error>Enter a description</mat-error>
+  </mat-form-field>
+  <div>
+    <button mat-flat-button color="accent"
+      type="submit" [disabled]="!expenseForm.valid">
+      Save Expense
+    </button>
+  </div>
+</form>

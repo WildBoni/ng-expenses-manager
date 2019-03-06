@@ -11,6 +11,10 @@
     <mat-icon>dashboard</mat-icon>
     <span class="nav-caption">Dashboard</span>
   </a>
+  <a mat-list-item routerLink="/insert" (click)="onClose()" *ngIf="isAuth">
+    <mat-icon>add</mat-icon>
+    <span class="nav-caption">Add</span>
+  </a>
   <mat-list-item>
     <button mat-icon-button (click)="onLogout()" *ngIf="isAuth">
       <mat-icon>eject</mat-icon>

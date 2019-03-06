@@ -25,10 +25,15 @@ export class ExpensesService {
       .pipe(
         map(docArray => {
           return docArray.map(doc => {
+            // let date = doc.payload.doc.data().date;
+            let date = doc.payload.doc.data()['date'].toDate();
             return {
               id: doc.payload.doc.id,
-              // name: doc.payload.doc.data().name,
-              // amount: doc.payload.doc.data().amount
+              title: doc.payload.doc.data()['title'],
+              amount: doc.payload.doc.data()['amount'],
+              creator: doc.payload.doc.data()['creator'],
+              date: date,
+              description: doc.payload.doc.data()['description']
             };
           });
         })
@@ -39,11 +44,16 @@ export class ExpensesService {
       }));
   }
 
+  getExpensesListener() {
+    return this.expenses.asObservable();
+  }
+
   cancelSubscriptions() {
     this.fbSubs.forEach(sub => sub.unsubscribe());
   }
 
-  private addDataToDatabase(expense: Expense) {
+  insertExpense(expense) {
+    // console.log(expense);
     this.db.collection('expenses').add(expense);
   }
 }

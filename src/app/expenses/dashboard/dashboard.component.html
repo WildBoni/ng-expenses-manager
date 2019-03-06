@@ -1,3 +1,10 @@
 <p>
   dashboard works!
 </p>
+<ul>
+  <li *ngFor="let expense of expenses">
+    {{expense.id}} | {{expense.title}} |
+    {{expense.amount}} | {{expense.creator}} |
+    {{expense.date}} | {{expense.description}}
+  </li>
+</ul>
