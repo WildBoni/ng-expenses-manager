@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
-
-import { AngularMaterialModule } from '../angular-material.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExpenseCreateComponent } from './expense-create/expense-create.component';
@@ -20,10 +17,8 @@ import { ExpenseCreateComponent } from './expense-create/expense-create.componen
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularMaterialModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ]
 })
 

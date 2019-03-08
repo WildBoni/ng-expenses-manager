@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { SharedModule } from '../shared/shared.module';
+import { AuthRoutingModule } from './auth-routing.module';
+
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
-import { AngularMaterialModule } from '../angular-material.module';
-import { AuthRoutingModule } from './auth-routing.module';
 
 import { environment } from '../../environments/environment';
 
@@ -21,8 +22,8 @@ import { environment } from '../../environments/environment';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularMaterialModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    SharedModule
   ]
 })
 export class AuthModule {}

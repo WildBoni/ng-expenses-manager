@@ -9,7 +9,9 @@ import {
   // MatCardModule,
   MatToolbarModule,
   MatSidenavModule,
-  // MatProgressSpinnerModule,
+  MatProgressSpinnerModule,
+  MatDatepickerModule,
+  MatNativeDateModule
   // MatExpansionModule,
   // MatDialogModule,
   // MatTableModule,
@@ -30,7 +32,9 @@ import {
     // MatCardModule,
     MatToolbarModule,
     MatSidenavModule,
-    // MatProgressSpinnerModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     // MatExpansionModule,
     // MatDialogModule,
     // MatTableModule,

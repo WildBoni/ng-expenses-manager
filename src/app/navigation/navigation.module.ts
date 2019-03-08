@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { AngularMaterialModule } from './../angular-material.module';
+import { SharedModule } from '../shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -16,8 +16,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
   imports: [
     CommonModule,
     FormsModule,
-    AngularMaterialModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   exports: [
     HeaderComponent,
