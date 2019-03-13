@@ -21,7 +21,7 @@ import { HomeComponent } from './home/home.component';
 
 import { environment } from '../environments/environment';
 import { UIService } from './shared/ui.service';
-import { appReducer } from './app.reducer';
+import { reducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { appReducer } from './app.reducer';
     NavigationModule,
     ExpensesModule,
     AppRoutingModule,
-    StoreModule.forRoot({ui: appReducer}),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 10})
   ],
   providers: [

@@ -2,10 +2,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subject, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { map } from 'rxjs/operators';
 
 import { Expense } from './expense.model';
+import * as UI from '../shared/ui.actions';
+import * as fromRoot from '../app.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +19,13 @@ export class ExpensesService {
   private availableExpenses: Expense[] = [];
   private fbSubs: Subscription[] = [];
 
-  constructor(private db: AngularFirestore) {}
+  constructor(
+    private db: AngularFirestore,
+    private store: Store<fromRoot.State>
+  ) {}
 
   fetchExpenses() {
+    this.store.dispatch(new UI.StartLoading());
     this.fbSubs.push(this.db
       .collection('expenses')
       .snapshotChanges()
@@ -38,10 +45,18 @@ export class ExpensesService {
           });
         })
       )
-      .subscribe((expenses: Expense[]) => {
-        this.availableExpenses = expenses;
-        this.expenses.next([...this.availableExpenses]);
-      }));
+      .subscribe(
+        (expenses: Expense[]) => {
+          this.store.dispatch(new UI.StopLoading());
+          this.availableExpenses = expenses;
+          this.expenses.next([...this.availableExpenses]);
+        },
+        error => {
+          this.store.dispatch(new UI.StopLoading());
+          this.expenses.next(null);
+        }
+      )
+    );
   }
 
   getExpensesListener() {
