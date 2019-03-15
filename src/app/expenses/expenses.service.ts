@@ -8,20 +8,21 @@ import { map } from 'rxjs/operators';
 
 import { Expense } from './expense.model';
 import * as UI from '../shared/ui.actions';
-import * as fromRoot from '../app.reducer';
+import * as Expenses from './expenses.actions';
+import * as fromExpenses from './expenses.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpensesService {
-  expense = new Subject<Expense>();
+  // expense = new Subject<Expense>();
   expenses = new Subject<Expense[]>();
   private availableExpenses: Expense[] = [];
   private fbSubs: Subscription[] = [];
 
   constructor(
     private db: AngularFirestore,
-    private store: Store<fromRoot.State>
+    private store: Store<fromExpenses.State>
   ) {}
 
   fetchExpenses() {
@@ -49,7 +50,7 @@ export class ExpensesService {
         (expenses: Expense[]) => {
           this.store.dispatch(new UI.StopLoading());
           this.availableExpenses = expenses;
-          this.expenses.next([...this.availableExpenses]);
+          this.store.dispatch(new Expenses.GetExpenses(expenses));
         },
         error => {
           this.store.dispatch(new UI.StopLoading());

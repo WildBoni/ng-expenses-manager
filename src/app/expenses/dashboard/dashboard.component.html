@@ -1,7 +1,8 @@
 <p>
   dashboard works!
 </p>
-<ul>
+<mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+<ul *ngIf="!(isLoading$ | async) && expenses">
   <li *ngFor="let expense of expenses">
     {{expense.id}} | {{expense.title}} |
     {{expense.amount}} | {{expense.creator}} |

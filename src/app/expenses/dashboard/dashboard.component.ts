@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+
+import { UIService } from '../../shared/ui.service';
+import * as fromRoot from '../../app.reducer';
 
 import { Expense } from '../expense.model';
 import { ExpensesService } from '../expenses.service';
@@ -14,6 +19,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   start = new Date('2019-02-01');
   end = new Date('2019-03-08');
   expenses: Expense[] = [];
+  isLoading$: Observable<boolean>;
   private expenseSub: Subscription;
 
   filterDate(start, end) {
@@ -24,10 +30,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  constructor(private expensesService: ExpensesService) { }
+  constructor(
+    private expensesService: ExpensesService,
+    private uiService: UIService,
+    private store: Store<fromRoot.State>
+  ) { }
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.expensesService.fetchExpenses();
+    // this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.expenseSub = this.expensesService.getExpensesListener()
       .subscribe((expenses: Expense[]) => {
         this.expenses = expenses;

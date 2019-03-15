@@ -11,13 +11,13 @@ import {
   MatSidenavModule,
   MatProgressSpinnerModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
   // MatExpansionModule,
   // MatDialogModule,
   // MatTableModule,
   // MatPaginatorModule,
   // MatSortModule,
-  // MatSnackBarModule,
+  MatSnackBarModule
   // MatGridListModule,
   // MAT_SNACK_BAR_DATA
 } from "@angular/material";
@@ -34,13 +34,13 @@ import {
     MatSidenavModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
     // MatExpansionModule,
     // MatDialogModule,
     // MatTableModule,
     // MatPaginatorModule,
     // MatSortModule,
-    // MatSnackBarModule,
+    MatSnackBarModule
     // MatGridListModule
   ],
   providers: [
