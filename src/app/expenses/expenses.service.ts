@@ -1,7 +1,6 @@
-
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { map } from 'rxjs/operators';
@@ -15,9 +14,6 @@ import * as fromExpenses from './expenses.reducer';
   providedIn: 'root'
 })
 export class ExpensesService {
-  // expense = new Subject<Expense>();
-  // expenses = new Subject<Expense[]>();
-  // private availableExpenses: Expense[] = [];
   private fbSubs: Subscription[] = [];
 
   constructor(
@@ -33,7 +29,6 @@ export class ExpensesService {
       .pipe(
         map(docArray => {
           return docArray.map(doc => {
-            // let date = doc.payload.doc.data().date;
             let date = doc.payload.doc.data()['date'].toDate();
             return {
               id: doc.payload.doc.id,
@@ -48,29 +43,31 @@ export class ExpensesService {
       )
       .subscribe(
         (expenses: Expense[]) => {
-          // this.availableExpenses = expenses;
-          // this.expenses.next([...this.availableExpenses]);
           this.store.dispatch(new UI.StopLoading());
           this.store.dispatch(new Expenses.SetExpenses(expenses));
         },
         error => {
           this.store.dispatch(new UI.StopLoading());
-          // this.expenses.next(null);
         }
       )
     );
   }
-
-  // getExpensesListener() {
-  //   return this.expenses.asObservable();
-  // }
 
   cancelSubscriptions() {
     this.fbSubs.forEach(sub => sub.unsubscribe());
   }
 
   insertExpense(expense) {
-    // console.log(expense);
     this.db.collection('expenses').add(expense);
+  }
+
+  deleteExpense(expense) {
+    this.db.collection('expenses').doc(expense).delete()
+      .then(()=> {
+        console.log("deleted");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

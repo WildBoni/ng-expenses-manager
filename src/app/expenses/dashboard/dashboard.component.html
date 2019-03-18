@@ -6,6 +6,9 @@
   <li *ngFor="let expense of expenses$ | async">
     {{expense.id}} | {{expense.title}} |
     {{expense.amount}} | {{expense.creator}} |
-    {{expense.date}} | {{expense.description}}
+    {{expense.date}} | {{expense.description}} |
+    <button mat-stroked-button color="warn" (click)="onDelete(expense.id)">
+      <i class="material-icons">delete</i> DELETE
+    </button>
   </li>
 </ul>
