@@ -3,7 +3,7 @@
 </p>
 <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
 <ul *ngIf="!(isLoading$ | async) && expenses">
-  <li *ngFor="let expense of expenses">
+  <li *ngFor="let expense of expenses$ | async">
     {{expense.id}} | {{expense.title}} |
     {{expense.amount}} | {{expense.creator}} |
     {{expense.date}} | {{expense.description}}

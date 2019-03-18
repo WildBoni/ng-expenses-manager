@@ -2,11 +2,11 @@ import { Action } from '@ngrx/store';
 
 import { Expense } from './expense.model';
 
-export const GET_EXPENSES = '[Expense] Get expenses';
+export const SET_EXPENSES = '[Expense] Set expenses';
 export const INSERT_EXPENSE = '[Expense] Insert expense';
 
-export class GetExpenses implements Action {
-  readonly type = GET_EXPENSES;
+export class SetExpenses implements Action {
+  readonly type = SET_EXPENSES;
 
   constructor(public payload: Expense[]) {}
 }
@@ -18,5 +18,5 @@ export class InsertExpense implements Action {
 }
 
 export type ExpensesActions =
-  | GetExpenses
+  | SetExpenses
   | InsertExpense;

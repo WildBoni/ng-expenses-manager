@@ -16,8 +16,8 @@ import * as fromExpenses from './expenses.reducer';
 })
 export class ExpensesService {
   // expense = new Subject<Expense>();
-  expenses = new Subject<Expense[]>();
-  private availableExpenses: Expense[] = [];
+  // expenses = new Subject<Expense[]>();
+  // private availableExpenses: Expense[] = [];
   private fbSubs: Subscription[] = [];
 
   constructor(
@@ -48,21 +48,22 @@ export class ExpensesService {
       )
       .subscribe(
         (expenses: Expense[]) => {
+          // this.availableExpenses = expenses;
+          // this.expenses.next([...this.availableExpenses]);
           this.store.dispatch(new UI.StopLoading());
-          this.availableExpenses = expenses;
-          this.store.dispatch(new Expenses.GetExpenses(expenses));
+          this.store.dispatch(new Expenses.SetExpenses(expenses));
         },
         error => {
           this.store.dispatch(new UI.StopLoading());
-          this.expenses.next(null);
+          // this.expenses.next(null);
         }
       )
     );
   }
 
-  getExpensesListener() {
-    return this.expenses.asObservable();
-  }
+  // getExpensesListener() {
+  //   return this.expenses.asObservable();
+  // }
 
   cancelSubscriptions() {
     this.fbSubs.forEach(sub => sub.unsubscribe());

@@ -2,7 +2,7 @@ import { Action, createFeatureSelector, createSelector } from '@ngrx/store';
 
 import {
   ExpensesActions,
-  GET_EXPENSES,
+  SET_EXPENSES,
   INSERT_EXPENSE
 } from './expenses.actions';
 import { Expense } from './expense.model';
@@ -14,7 +14,7 @@ export interface ExpensesState {
 }
 
 export interface State extends fromRoot.State {
-  expenses: ExpensesState;
+  expense: ExpensesState;
 }
 
 const initialState: ExpensesState = {
@@ -31,7 +31,7 @@ const initialState: ExpensesState = {
 
 export function expensesReducer(state = initialState, action: ExpensesActions) {
   switch (action.type) {
-    case GET_EXPENSES:
+    case SET_EXPENSES:
       return {
         ...state,
         expenses: action.payload
