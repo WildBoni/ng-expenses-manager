@@ -14,7 +14,7 @@ export class SetExpenses implements Action {
 export class InsertExpense implements Action {
   readonly type = INSERT_EXPENSE;
 
-  constructor(public payload: Expense[]) {}
+  constructor(public payload: Expense) {}
 }
 
 export type ExpensesActions =

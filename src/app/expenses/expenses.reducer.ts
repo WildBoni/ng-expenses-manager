@@ -50,4 +50,4 @@ export function expensesReducer(state = initialState, action: ExpensesActions) {
 export const getExpensesState = createFeatureSelector<ExpensesState>('expense');
 
 export const getExpenses = createSelector(getExpensesState, (state: ExpensesState) => state.expenses);
-export const insertExpense = createSelector(getExpensesState, (state: ExpensesState) => state.newExpense);
+// export const insertExpense = createSelector(getExpensesState, (state: ExpensesState) => state.newExpense);

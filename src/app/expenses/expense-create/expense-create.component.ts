@@ -7,11 +7,13 @@ import {
   Validators
 } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Subscription, Observable } from 'rxjs';
 
 import { Expense } from '../expense.model';
 import { ExpensesService } from '../expenses.service';
 import { AuthService } from '../../auth/auth.service';
+import * as fromRoot from '../../app.reducer';
 
 @Component({
   selector: 'app-expense-create',
@@ -27,11 +29,16 @@ export class ExpenseCreateComponent implements OnInit {
   constructor(
     private expensesService: ExpensesService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
-    this.userId = null;
+    this.userIdSub = this.store.select(fromRoot.getUser)
+      .subscribe((user) => {
+        this.userId = user.id;
+      });
+      console.log(this.userId);
     this.expenseForm = this.fb.group({
       title: ['', Validators.required],
       amount: ['', Validators.pattern("^[0-9].*$")],
