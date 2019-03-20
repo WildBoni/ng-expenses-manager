@@ -21,30 +21,54 @@ export class ExpensesService {
     private store: Store<fromExpenses.State>
   ) {}
 
-  fetchExpenses() {
+  fetchExpenses(id) {
+    const groupId = id;
     this.store.dispatch(new UI.StartLoading());
     this.fbSubs.push(this.db
       .collection('expenses')
       .snapshotChanges()
       .pipe(
-        map(docArray => {
-          return docArray.map(doc => {
-            let date = doc.payload.doc.data()['date'].toDate();
+        map(expenses => {
+          return expenses.map(expense => {
+            const data = expense.payload.doc.data();
+            const id = expense.payload.doc.id;
             return {
-              id: doc.payload.doc.id,
-              title: doc.payload.doc.data()['title'],
-              amount: doc.payload.doc.data()['amount'],
-              creator: doc.payload.doc.data()['creator'],
-              date: date,
-              description: doc.payload.doc.data()['description']
+              id, ...data
             };
           });
         })
       )
       .subscribe(
         (expenses: Expense[]) => {
+          const groupExpenses = expenses.filter(expense => expense.group == groupId);
           this.store.dispatch(new UI.StopLoading());
-          this.store.dispatch(new Expenses.SetExpenses(expenses));
+          this.store.dispatch(new Expenses.SetExpenses(groupExpenses));
+        },
+        error => {
+          this.store.dispatch(new UI.StopLoading());
+        }
+      )
+    );
+  }
+
+  fetchExpense(id) {
+    this.store.dispatch(new UI.StartLoading());
+    this.fbSubs.push(this.db.collection('expenses')
+      .doc(id)
+      .snapshotChanges()
+      .pipe(
+        map(expense => {
+          const data = expense.payload.data();
+          const id = expense.payload.id;
+          return {
+            id, ...data
+          };
+        })
+      )
+      .subscribe(
+        (expense: Expense) => {
+          this.store.dispatch(new UI.StopLoading());
+          this.store.dispatch(new Expenses.SetExpense(expense));
         },
         error => {
           this.store.dispatch(new UI.StopLoading());

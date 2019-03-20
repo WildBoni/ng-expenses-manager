@@ -3,6 +3,7 @@ export interface Expense {
   title: string;
   amount: number;
   creator: string;
+  group: string;
   date?: Date;
   description?: string;
 }

@@ -1,14 +1,6 @@
 <p>
   dashboard works!
 </p>
-<mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
-<ul *ngIf="!(isLoading$ | async) && expenses">
-  <li *ngFor="let expense of expenses$ | async">
-    {{expense.id}} | {{expense.title}} |
-    {{expense.amount}} | {{expense.creator}} |
-    {{expense.date}} | {{expense.description}} |
-    <button mat-stroked-button color="warn" (click)="onDelete(expense.id)">
-      <i class="material-icons">delete</i> DELETE
-    </button>
-  </li>
-</ul>
+<a mat-flat-button color="primary" [routerLink]="['/groups']">
+  <i class="material-icons">folder</i> Groups
+</a>

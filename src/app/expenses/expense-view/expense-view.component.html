@@ -1,0 +1,12 @@
+<p>
+  detail
+</p>
+<mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+<div *ngIf="expense">
+  {{expense.id}} | {{expense.title}} |
+  {{expense.amount}} | {{expense.creator}} |
+  {{expense.date}} | {{expense.description}} |
+  <button mat-stroked-button color="warn" (click)="onDelete(expense.id)">
+    <i class="material-icons">delete</i> DELETE
+  </button>
+</div>

@@ -11,10 +11,18 @@
     <mat-icon>dashboard</mat-icon>
     <span class="nav-caption">Dashboard</span>
   </a>
-  <a mat-list-item routerLink="/insert" (click)="onClose()" *ngIf="isAuth$ | async">
-    <mat-icon>add</mat-icon>
-    <span class="nav-caption">Add</span>
+  <a mat-list-item routerLink="/groups" (click)="onClose()" *ngIf="isAuth$ | async">
+    <mat-icon>folder</mat-icon>
+    <span class="nav-caption">Your Groups</span>
   </a>
+  <a mat-list-item routerLink="/add-expense" (click)="onClose()" *ngIf="isAuth$ | async">
+    <mat-icon>add</mat-icon>
+    <span class="nav-caption">Add Expense</span>
+  </a>
+  <!-- <a mat-list-item routerLink="/insert" (click)="onClose()" *ngIf="isAuth$ | async">
+    <mat-icon>add</mat-icon>
+    <span class="nav-caption">Add Group</span>
+  </a> -->
   <mat-list-item>
     <button mat-icon-button (click)="onLogout()" *ngIf="isAuth$ | async">
       <mat-icon>eject</mat-icon>

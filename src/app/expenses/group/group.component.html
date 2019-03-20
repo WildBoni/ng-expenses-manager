@@ -1,0 +1,13 @@
+<h1>Groups</h1>
+<mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+<ul *ngIf="!(isLoading$ | async) && groups">
+  <li *ngFor="let group of groups$ | async">
+    {{group.id}} | {{group.title}} | {{group.description}} |
+    <a mat-flat-button color="primary" [routerLink]="['/groups', group.id]">
+      <i class="material-icons">list</i> VIEW
+    </a>
+    <button mat-stroked-button color="warn" (click)="onDelete(group.id)">
+      <i class="material-icons">delete</i> DELETE
+    </button>
+  </li>
+</ul>

@@ -70,7 +70,6 @@ export class AuthService {
     this.afAuth.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
       .then(result => {
-        console.log(result);
         this.store.dispatch(new UI.StopLoading());
       })
       .catch(error => {
@@ -86,7 +85,6 @@ export class AuthService {
        this.afAuth.auth
        .signInWithPopup(provider)
        .then(res => {
-         console.log(res);
          this.user = {
            id: res.user.uid,
            name: res.user.displayName,
@@ -140,7 +138,7 @@ export class AuthService {
       .subscribe(
       (user) => {
         if(user.length != 0) {
-          console.log(user);
+          // console.log(user);
         } else {
           this.addUser(this.user);
         }

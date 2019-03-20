@@ -38,7 +38,6 @@ export class ExpenseCreateComponent implements OnInit {
       .subscribe((user) => {
         this.userId = user.id;
       });
-      console.log(this.userId);
     this.expenseForm = this.fb.group({
       title: ['', Validators.required],
       amount: ['', Validators.pattern("^[0-9].*$")],
